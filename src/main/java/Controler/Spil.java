@@ -5,14 +5,9 @@ import Model.Chance.ChanceCard;
 import Model.Fields.*;
 import View.BoardGUI;
 import View.ViewGUI;
-import gui_fields.GUI_Car;
-import gui_fields.GUI_Ownable;
-import gui_fields.GUI_Player;
 import gui_main.GUI;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static Model.Account.*;
 
@@ -168,3 +163,25 @@ public class Spil {
         viewGUI.updateBalance(sl);
         spiller.extraTurns += 1;
     }
+    private void OnOwneble(Dice dice1, Dice dice2, FieldList fl, GUI gui, ViewGUI viewGUI, Spiller spiller) {
+        viewGUI.moveCar(spiller, dice1.getFaceValue() + dice2.getFaceValue());
+        Field currentField = fl.getField(spiller.getPosition());
+        if (currentField instanceof Owneble && ((Owneble) currentField).getOwner() == null && spiller.getAccount().getBalance() > ((Owneble) currentField).getPrice()) {
+            String buy = gui.getUserButtonPressed("Vil du købe " + currentField.getName() + " for " + ((Owneble) currentField).getPrice(), "Ja", "Nej");
+            if (buy.equals("Ja")) {
+                withdraw(spiller.getAccount(), ((Owneble) currentField).getPrice());
+                ((Owneble) currentField).setOwner(spiller);
+                viewGUI.buyOwneble(spiller);
+            }
+        } else if(currentField instanceof Owneble && ((Owneble) currentField).getOwner() != null){
+            pay(spiller.getAccount(), ((Owneble) currentField).getOwner().getAccount() ,((Owneble) currentField).getRent());
+        }
+    }
+
+    private boolean hasLost(SpillerListe sl){
+        for (int i = 0; i < sl.getPlayerAmount(); i++) {
+            return sl.getPlayerList(i).getAccount().getBalance() > 0;
+        }
+        return false;
+    }
+}

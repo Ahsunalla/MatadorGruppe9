@@ -73,3 +73,15 @@ public class Spiller {
     public int getPlayerNumber() {
         return playerNumber;
     }
+    public void setPlayerNumber(int playerNumber) {
+        this.playerNumber = playerNumber;
+    }
+
+    public boolean getExtraTurn() {
+        return extraTurn;
+    }
+
+    public void setExtraTurn(boolean b) {
+        extraTurn = b;
+    }
+}
