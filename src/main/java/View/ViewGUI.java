@@ -19,6 +19,11 @@ public class ViewGUI {
     private GUI_Field[] gui_fields;
 
 
+    public ViewGUI(GUI gui){
+        this.gui = gui;
+        this.gui_fields = gui.getFields();
+    }
+
     GUI_Car.Type[] carTypes = {CAR, RACECAR, TRACTOR, UFO};
     GUI_Car.Pattern[] carPatterns = {FILL, HORIZONTAL_GRADIANT, DIAGONAL_DUAL_COLOR,
             HORIZONTAL_DUAL_COLOR, HORIZONTAL_LINE, CHECKERED, DOTTED, ZEBRA};
@@ -41,6 +46,7 @@ public class ViewGUI {
                     carType = item;
                 }
             }
+
             String primaryColor = gui.getUserButtonPressed("Vælg din bils primær farve", "BLUE", "ORANGE", "RED", "GREEN", "YELLOW", "WHITE");
             Color primaryCarColor = colorFromString(primaryColor);
 
@@ -61,6 +67,7 @@ public class ViewGUI {
             gui_players[i].getCar().setPosition(gui_fields[0]);
         }
     }
+
     private Color colorFromString(String color) {
         switch (color) {
             case "BLUE" -> {return Color.BLUE;}
@@ -77,51 +84,53 @@ public class ViewGUI {
         for (int i = 0; i < gui_players.length; i++) {
             gui_players[i].setBalance(sl.getPlayerList(i).getAccount().getBalance());
         }
-
-        public void moveCar(Spiller player, int moveAmount){
-            player.setPosition(player.getPosition() + moveAmount);
-            gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
-        }
-
-        public void moveCarToField(Spiller player, int fieldToMoveTo){
-            player.setPosition(fieldToMoveTo);
-            gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
-        }
-        public void buyOwneble(Spiller player){
-            GUI_Player gui_player = gui_players[player.getPlayerNumber()];
-            GUI_Field f = gui_fields[player.getPosition()];
-            if(f instanceof GUI_Ownable o){
-                gui_player.setBalance(player.getAccount().getBalance());
-                o.setBorder(gui_player.getPrimaryColor(), gui_player.getSecondaryColor());
-            }
-        }
-
-        public void showChanceCard(String message){
-            gui.displayChanceCard(message);
-        }
-
-        public void buyHouseHotel(Street field, int index){
-            GUI_Field f = gui.getFields()[index];
-            if(f instanceof GUI_Street s){
-                if(field.getHouseAmount() <= 4){
-                    s.setHouses(field.getHouseAmount());
-                } else
-                    s.setHotel(true);
-            }
-        }
-
-        public void showMessage(String message) {
-            gui.showMessage(message);
-        }
-
     }
-        public void setDice(int dice1, int dice2){
-            for(int a = 0; a <= 360; a++) {
-                gui.setDice(dice1, a, 5, 5, dice2, 359 - a, 6, 5);
-                try {
-                    Thread.sleep(5);
-                } catch(InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+
+    public void moveCar(Spiller player, int moveAmount){
+        player.setPosition(player.getPosition() + moveAmount);
+        gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+    }
+
+    public void moveCarToField(Spiller player, int fieldToMoveTo){
+        player.setPosition(fieldToMoveTo);
+        gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+    }
+
+    public void setDice(int dice1, int dice2){
+        for(int a = 0; a <= 360; a++) {
+            gui.setDice(dice1, a, 5, 5, dice2, 359 - a, 6, 5);
+            try {
+                Thread.sleep(5);
+            } catch(InterruptedException ex) {
+                ex.printStackTrace();
             }
         }
+    }
+    public void buyOwneble(Spiller player){
+        GUI_Player gui_player = gui_players[player.getPlayerNumber()];
+        GUI_Field f = gui_fields[player.getPosition()];
+        if(f instanceof GUI_Ownable o){
+            gui_player.setBalance(player.getAccount().getBalance());
+            o.setBorder(gui_player.getPrimaryColor(), gui_player.getSecondaryColor());
+        }
+    }
+
+    public void showChanceCard(String message){
+        gui.displayChanceCard(message);
+    }
+
+    public void buyHouseHotel(Street field, int index){
+        GUI_Field f = gui.getFields()[index];
+        if(f instanceof GUI_Street s){
+            if(field.getHouseAmount() <= 4){
+                s.setHouses(field.getHouseAmount());
+            } else
+                s.setHotel(true);
+        }
+    }
+
+    public void showMessage(String message) {
+        gui.showMessage(message);
+    }
+
+}

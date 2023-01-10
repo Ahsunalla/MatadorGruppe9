@@ -10,7 +10,7 @@ public class FieldList {
 
     public Field[] CreateFieldList() {
         fields[0] = new Start("Start", "Start felt");
-        fields[1] = new Street("Rødovrevej", "Rødorevej", 1200, 1000, new int[]{50, 250, 750, 2250, 4000, 6000}, Color.blue,2);
+        fields[1] = new Street("Rødovrevej", "Rødorevej", 1200, 1000, new int[]{50, 250, 750, 2250, 4000, 6000}, Color.blue, 2);
         fields[2] = new Chance("Chance", "Prøv lykken");
         fields[3] = new Street("Hvidovrevej", "Hvidovrevej", 1200, 1000, new int[]{50, 250, 400, 750, 2250, 6000},Color.blue,2);
         fields[4] = new Tax("Tax", "Tax", 4000);
