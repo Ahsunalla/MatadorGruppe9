@@ -60,3 +60,20 @@ public class ViewGUI {
             gui_players[i].getCar().setPosition(gui_fields[0]);
         }
     }
+    private Color colorFromString(String color) {
+        switch (color) {
+            case "BLUE" -> {return Color.BLUE;}
+            case "ORANGE" -> {return Color.ORANGE;}
+            case "RED" -> {return Color.RED;}
+            case "GREEN" -> {return Color.GREEN;}
+            case "YELLOW" -> {return Color.YELLOW;}
+            case "WHITE" -> {return Color.WHITE;}
+            default -> {return Color.BLACK;}
+        }
+    }
+
+    public void updateBalance(SpillerListe sl){
+        for (int i = 0; i < gui_players.length; i++) {
+            gui_players[i].setBalance(sl.getPlayerList(i).getAccount().getBalance());
+        }
+

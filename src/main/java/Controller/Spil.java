@@ -97,3 +97,34 @@ public class Spil {
             }
         }
     }
+    private void takeTurn(GUI gui, ViewGUI viewGUI, Spiller spiller, Dice dice1, Dice dice2, FieldList fl, SpillerListe sl, ChanceDeck deck){
+        gui.showMessage("Kast med tærningerne " + spiller.getName());
+        viewGUI.setDice(dice1.roll(), dice2.roll());
+        spiller.setExtraTurn(dice1.getFaceValue() == dice2.getFaceValue());
+        OnOwneble(dice1, dice2, fl, gui, viewGUI, spiller);
+        Field currentField = fl.getField(spiller.getPosition());
+
+        if (currentField instanceof Tax) {
+            withdraw(spiller.getAccount(), ((Tax) currentField).getTax());
+            viewGUI.updateBalance(sl);
+        }
+
+        if (currentField instanceof Chance){
+            ChanceCard chanceCard = deck.drawCard();
+            chanceCard.doCard(spiller, viewGUI);
+            viewGUI.showChanceCard(chanceCard.getDescription());
+
+        }
+
+        if (spiller.getPosition() == 30) {
+            gui.showMessage("Du går til fængslet");
+            spiller.setPassingMoney(false);
+            spiller.setJail(true);
+            viewGUI.moveCarToField(spiller, JAILFIELD);
+        }
+
+        if(spiller.isPassingMoney() && spiller.previousPosition > spiller.getPosition()){
+            deposit(spiller.getAccount(), 4000);
+        }
+        int j = 0;
+        String[] ownedFieldsNames;

@@ -43,3 +43,19 @@ public class Spiller {
         this.previousPosition = getPosition();
         this.position = pos%39;
     }
+    public int getPosition(){
+        return position;
+    }
+    public boolean isJail() {
+        return isJail;
+    }
+    public void setJail(boolean jail) {
+        isJail = jail;
+    }
+
+    public boolean isPassingMoney() {
+        return passingMoney;
+    }
+    public void setPassingMoney(boolean passingMoney) {
+        this.passingMoney = passingMoney;
+    }
