@@ -34,3 +34,36 @@ public class Spil {
         GUI gui = new GUI(boardGUI.guiFields(fields), Color.WHITE);
         ViewGUI viewGUI = new ViewGUI(gui);
         Spiller spiller;
+
+        String amountPlayers = gui.getUserButtonPressed("Vælg antallet af spiller", "1","2","3", "4", "5", "6");
+
+        SpillerListe sl = new SpillerListe(Integer.parseInt(amountPlayers));
+
+        sl.setCurrentPlayer(0);
+
+        viewGUI.addPlayers(sl);
+
+        while(true) {
+            spiller = sl.getCurrentPlayer();
+
+            spiller.setPassingMoney(true);
+
+            if (spiller.isJail()){
+                spiller.setJailTurns(spiller.getJailTurns()+1);
+
+                String jailString = gui.getUserButtonPressed("Vælg en måde du vil komme ud af fængslet på", "Betal bøde på 1000", "Benyt lødsladeseskort", "Prøv at kaste 2 ens");
+
+                if (jailString.equals("Betal bøde på 1000"))  {
+                    if (spiller.getAccount().getBalance() > 1000) {
+                        withdraw(spiller.getAccount(), 1000);
+                        viewGUI.updateBalance(sl);
+                        spiller.setJail(false);
+                    }
+                }
+
+                if (jailString.equals("Benyt lødsladeseskort")){
+                    if(spiller.isSetOutofJailCard()) {
+                        spiller.setSetOutofJailCard(false);
+                        spiller.setJail(false);
+                    }
+                }
