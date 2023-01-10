@@ -9,14 +9,22 @@ public abstract class Owneble extends Field{
     private Spiller owner;
     private int houseAmount;
     Color color;
-
-    public Owneble(String name, String message, int price, int[] rent, Color color) {
+    private int monopoly;
+    public Owneble(String name, String message, int price, int[] rent, Color color, int monopoly) {
         super(name, message);
         this.owner = null;
         this.rent = rent;
         this.price = price;
         this.color = color;
         this.houseAmount = 0;
+        this.monopoly = monopoly;
+    }
+    public int getMonopoly() {
+        return monopoly;
+    }
+
+    public void setMonopoly(int monopoly) {
+        this.monopoly = monopoly;
     }
 
     public Color getColor() {
@@ -35,8 +43,12 @@ public abstract class Owneble extends Field{
     }
 
     public int getRent() {
+        if (getHouseAmount() > rent.length-1){
+            return rent[rent.length-1];
+        }
         return rent[getHouseAmount()];
     }
+
 
     public Spiller getOwner() {
         return owner;
@@ -53,4 +65,6 @@ public abstract class Owneble extends Field{
     public void setHouseAmount(int houseAmount) {
         this.houseAmount = houseAmount;
     }
+
+
 }
