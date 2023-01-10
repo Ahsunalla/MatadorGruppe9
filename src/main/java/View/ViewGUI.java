@@ -86,3 +86,13 @@ public class ViewGUI {
             player.setPosition(fieldToMoveTo);
             gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
         }
+        public void setDice(int dice1, int dice2){
+            for(int a = 0; a <= 360; a++) {
+                gui.setDice(dice1, a, 5, 5, dice2, 359 - a, 6, 5);
+                try {
+                    Thread.sleep(5);
+                } catch(InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        }
