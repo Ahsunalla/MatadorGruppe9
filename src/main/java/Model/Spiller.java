@@ -59,3 +59,17 @@ public class Spiller {
     public void setPassingMoney(boolean passingMoney) {
         this.passingMoney = passingMoney;
     }
+
+    public int getJailTurns() {
+        return jailTurns;
+    }
+    public void setJailTurns(int jailTurns) {
+        this.jailTurns = jailTurns;
+    }
+    public Account getAccount() {
+        return account;
+    }
+
+    public int getPlayerNumber() {
+        return playerNumber;
+    }

@@ -77,3 +77,12 @@ public class ViewGUI {
             gui_players[i].setBalance(sl.getPlayerList(i).getAccount().getBalance());
         }
 
+        public void moveCar(Spiller player, int moveAmount){
+            player.setPosition(player.getPosition() + moveAmount);
+            gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+        }
+
+        public void moveCarToField(Spiller player, int fieldToMoveTo){
+            player.setPosition(fieldToMoveTo);
+            gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+        }

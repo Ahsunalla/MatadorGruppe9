@@ -128,3 +128,43 @@ public class Spil {
         }
         int j = 0;
         String[] ownedFieldsNames;
+
+        or (int i = 0; i < fl.getFields().length; i++) {
+
+            Field f = fl.getField(i);
+            if (f instanceof Street && ((Street) f).getOwner() == spiller){
+                j++;
+            }
+        }
+
+        ownedFieldsNames = new String[j];
+        int k = 0;
+        for (int i = 0; i < fl.getFields().length; i++) {
+            Field f = fl.getField(i);
+            if (f instanceof Street && ((Street) f).getOwner() == spiller){
+                ownedFieldsNames[k] = f.getName();
+                k++;
+            }
+        }
+
+        if(ownedFieldsNames.length != 0) {
+            String buyHouseString = gui.getUserButtonPressed("Vil du købe et hus el. hotel?", "Ja", "Nej");
+            if (buyHouseString.equals("Ja")) {
+                String ownedString = gui.getUserSelection("Hvilken Grund vil du købe hus eller hotel på", ownedFieldsNames);
+
+                int index = 0;
+                Street buyHouse = null;
+                for (int i = 0; i < fl.getFields().length; i++) {
+                    if (ownedString.equals(fl.getField(i).getName())) {
+                        buyHouse = (Street) fl.getField(i);
+                        index = i;
+                    }
+                }
+                assert buyHouse != null;
+                buyHouse.setHouseAmount(buyHouse.getHouseAmount() + 1);
+                viewGUI.buyHouseHotel(buyHouse, index);
+            }
+        }
+        viewGUI.updateBalance(sl);
+        spiller.extraTurns += 1;
+    }
