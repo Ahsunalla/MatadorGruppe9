@@ -25,3 +25,21 @@ public class Spiller {
     public void setName(String name){
         this.name = name;
     }
+    public Spiller(String name, int startingBalance) {
+        this.name = name;
+        this.account = new Account(startingBalance);
+        this.position = 0;
+        this.isJail = false;
+    }
+
+    public boolean isSetOutofJailCard() {
+        return setOutofJailCard;
+    }
+
+    public void setSetOutofJailCard(boolean setOutofJailCard) {
+        this.setOutofJailCard = setOutofJailCard;
+    }
+    public void setPosition(int pos){
+        this.previousPosition = getPosition();
+        this.position = pos%39;
+    }

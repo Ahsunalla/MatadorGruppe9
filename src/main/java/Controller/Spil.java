@@ -67,3 +67,33 @@ public class Spil {
                         spiller.setJail(false);
                     }
                 }
+                if(jailString.equals("Prøv at kaste 2 ens")){
+                    viewGUI.setDice(dice1.roll(), dice2.roll());
+                    if(dice1.getFaceValue() == dice2.getFaceValue()){
+                        spiller.setJail(false);
+                        OnOwneble(dice1, dice2, fl, gui, viewGUI, spiller);
+                    }
+                }
+                if(spiller.getJailTurns() >= 3){
+                    spiller.setJail(false);
+                }
+            } else {
+                spiller.extraTurns = 0;
+
+                takeTurn(gui,viewGUI,spiller,dice1,dice2,fl,sl, deck);
+
+                while(spiller.getExtraTurn()){
+                    if(spiller.extraTurns < 2){
+                        takeTurn(gui,viewGUI,spiller,dice1,dice2,fl,sl, deck);
+                    } else {
+                        gui.showMessage("Du går til fængslet");
+                        spiller.setPassingMoney(false);
+                        spiller.setJail(true);
+                        viewGUI.moveCarToField(spiller, JAILFIELD);
+                        break;
+                    }
+                }
+                sl.getNextPlayer();
+            }
+        }
+    }
