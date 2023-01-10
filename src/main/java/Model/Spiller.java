@@ -13,3 +13,15 @@ public class Spiller {
     public int playerNumber;
 
     public boolean setOutofJailCard;
+    public boolean isJail;
+    public int jailTurns;
+    public boolean passingMoney = true;
+    public boolean extraTurn = false;
+    public int extraTurns;
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
