@@ -1,7 +1,5 @@
 package Model;
 
-import Model.Fields.*;
-
 import java.awt.*;
 
 public class FieldList {
