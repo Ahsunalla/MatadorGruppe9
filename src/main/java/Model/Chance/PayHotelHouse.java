@@ -18,5 +18,6 @@ public class PayHotelHouse extends ChanceCard{
     public void doCard(Spiller player, ViewGUI gui) {
         super.doCard(player, gui);
 
+
     }
 }

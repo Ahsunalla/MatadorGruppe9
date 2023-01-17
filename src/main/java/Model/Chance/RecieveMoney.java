@@ -21,4 +21,3 @@ public class RecieveMoney extends ChanceCard{
         deposit(player.getAccount(), amount);
     }
 }
-// hi jeg heddder ahmad

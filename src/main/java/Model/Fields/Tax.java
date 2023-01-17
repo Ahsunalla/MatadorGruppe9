@@ -14,4 +14,6 @@ public class Tax extends Field{
         super(name, message);
         this.tax = tax;
     }
+
+
 }

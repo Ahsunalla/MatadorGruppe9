@@ -7,12 +7,7 @@ import java.util.Random;
 
 public class ChanceDeck {
 
-    ChanceCard[] deck = new ChanceCard[42];
-
-    public ChanceDeck() {
-
-
-    }
+    ChanceCard[] deck = new ChanceCard[43];
 
     public ChanceCard[] createDeck(){
         deck[0] = new PayHotelHouse("Oliepriserne er steget, og De skal betale kr 500 pr hus og kr 2000 pr hotel", 500, 2000);
@@ -42,21 +37,22 @@ public class ChanceDeck {
         deck[24] = new RecieveMoney("De har lagt penge ud til et sammenskudsgilde. Mærkværdigvis betaler alle straks. Modtag fra hver medspiller 500 kr.", 500);
         deck[25] = new MoveToField("Ryk frem til START", 0);
         deck[26] = new MoveToField("Ryk frem til START", 0);
-        deck[27] = new MoveToField("Ryk tre felter frem", 200);
-        deck[28] = new MoveToField("Ryk tre felter tilbage", 200);
-        deck[29] = new MoveToField("Ryk tre felter tilbage", 200);
+        deck[27] = new MoveFieldAmount("Ryk tre felter frem", 3);
+        deck[28] = new MoveFieldAmount("Ryk tre felter tilbage", -3);
+        deck[29] = new MoveFieldAmount("Ryk tre felter tilbage", -3);
         deck[30] = new MoveToField("Ryk frem til Frederiksberg Allé. Hvis De passere START, indkasser da 4000 kr.", 11);
-        deck[31] = new MoveToField("Ryk frem til det nærmeste rederi og betal ejeren to gange den leje han ellers er berettiget til, hvis selskabet ikke ejes af nogen kan De købe det af banken.", 200);
-        deck[32] = new MoveToField("Ryk frem til det nærmeste rederi og betal ejeren to gange den leje han ellers er berettiget til, hvis selskabet ikke ejes af nogen kan De købe det af banken.", 200);
+        deck[31] = new MoveToFerry("Ryk frem til det nærmeste rederi og betal ejeren to gange den leje han ellers er berettiget til, hvis selskabet ikke ejes af nogen kan De købe det af banken.");
+        deck[32] = new MoveToFerry("Ryk frem til det nærmeste rederi og betal ejeren to gange den leje han ellers er berettiget til, hvis selskabet ikke ejes af nogen kan De købe det af banken.");
         deck[33] = new MoveToField("Tag med Mols-Linien, flyt brikken frem og hvis De passerer START indkassér da kr 4000.", 15);
         deck[34] = new MoveToField("Ryk frem til Grønningen, hvis De passerer start indkasser da kr 4000.", 24);
         deck[35] = new MoveToField("Ryk frem til Vimmelskaftet, hvis de passerer start indkasser da kr 4000.", 32);
-        deck[36] = new MoveToField("Tag med den nærmeste færge, hvis de passerer start indkasser da kr 4000.", 200);
+        deck[36] = new MoveToFerry("Tag med den nærmeste færge, hvis de passerer start indkasser da kr 4000.");
         deck[37] = new MoveToField("Ryk frem til Strandvejen. Hvis De passere START, indkasser da 4000 kr.", 19);
         deck[38] = new MoveToField("Tag til Rådhuspladsen", 39);
-        deck[39] = new MoveToField("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares indtil De får brug for det, eller De kan sælge det. (antal kort: 2)", 200);
-        deck[40] = new MoveToField("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.", 200);
-        deck[41] = new MoveToField("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.", 200);
+        deck[39] = new JailCard("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares indtil De får brug for det, eller De kan sælge det");
+        deck[40] = new JailCard("I anledning af kongens fødselsdag benådes De herved for fængsel. Dette kort kan opbevares indtil De får brug for det, eller De kan sælge det");
+        deck[41] = new GoJail("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.");
+        deck[42] = new GoJail("Gå i fængsel, De indkasserer ikke 4000 kr for at passere start.");
 
         return deck;
 

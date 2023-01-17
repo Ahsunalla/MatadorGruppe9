@@ -18,6 +18,6 @@ public class WithdrawMoney extends ChanceCard {
     @Override
     public void doCard(Spiller player, ViewGUI gui) {
         super.doCard(player, gui);
-        withdraw(player.getAccount(), amount);
+        withdraw(player.getAccount(), amount, player);
     }
 }

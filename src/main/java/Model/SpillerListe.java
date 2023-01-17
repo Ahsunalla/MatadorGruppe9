@@ -20,7 +20,7 @@ public class SpillerListe {
         this.playerAmount = playerAmount;
         players = new Spiller[playerAmount];
         for (int i = 0; i < playerAmount; i++) {
-            players[i] = new Spiller(null,30000);
+            players[i] = new Spiller(null,3000);
             players[i].setPlayerNumber(i);
         }
     }

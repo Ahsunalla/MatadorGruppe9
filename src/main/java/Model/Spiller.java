@@ -7,29 +7,37 @@ import java.util.ArrayList;
 
 public class Spiller {
     private String name;
-    public Account account;
-    public int position = 0;
+    private final Account account;
+    private int position = 0;
     public int previousPosition = 0;
-    public int playerNumber;
+    private int playerNumber;
 
-    public boolean setOutofJailCard;
-    public boolean isJail;
-    public int jailTurns;
-    public boolean passingMoney = true;
-    public boolean extraTurn = false;
+
+    private boolean setOutofJailCard;
+    private boolean isJail;
+    private int jailTurns;
+    private boolean passingMoney = true;
+    private boolean extraTurn = false;
+    private boolean bankRupt;
     public int extraTurns;
+    private boolean hasLost;
 
     public String getName() {
         return name;
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
+
     public Spiller(String name, int startingBalance) {
         this.name = name;
         this.account = new Account(startingBalance);
         this.position = 0;
         this.isJail = false;
+        this.bankRupt = false;
+        this.setOutofJailCard = false;
+        this.hasLost = false;
     }
 
     public boolean isSetOutofJailCard() {
@@ -39,16 +47,20 @@ public class Spiller {
     public void setSetOutofJailCard(boolean setOutofJailCard) {
         this.setOutofJailCard = setOutofJailCard;
     }
-    public void setPosition(int pos){
+
+    public void setPosition(int pos) {
         this.previousPosition = getPosition();
-        this.position = pos%39;
+        this.position = pos % 39;
     }
-    public int getPosition(){
+
+    public int getPosition() {
         return position;
     }
+
     public boolean isJail() {
         return isJail;
     }
+
     public void setJail(boolean jail) {
         isJail = jail;
     }
@@ -56,6 +68,7 @@ public class Spiller {
     public boolean isPassingMoney() {
         return passingMoney;
     }
+
     public void setPassingMoney(boolean passingMoney) {
         this.passingMoney = passingMoney;
     }
@@ -63,9 +76,11 @@ public class Spiller {
     public int getJailTurns() {
         return jailTurns;
     }
+
     public void setJailTurns(int jailTurns) {
         this.jailTurns = jailTurns;
     }
+
     public Account getAccount() {
         return account;
     }
@@ -73,6 +88,7 @@ public class Spiller {
     public int getPlayerNumber() {
         return playerNumber;
     }
+
     public void setPlayerNumber(int playerNumber) {
         this.playerNumber = playerNumber;
     }
@@ -81,7 +97,23 @@ public class Spiller {
         return extraTurn;
     }
 
+    public void bankRupt() {
+        this.bankRupt = true;
+    }
+
+    public boolean isBankRupt() {
+        return bankRupt;
+    }
     public void setExtraTurn(boolean b) {
         extraTurn = b;
     }
+
+    public boolean hasLost() {
+        return hasLost;
+    }
+
+    public void setHasLost(boolean hasLost){
+        this.hasLost = hasLost;
+    }
 }
+

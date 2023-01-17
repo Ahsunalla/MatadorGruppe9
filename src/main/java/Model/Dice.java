@@ -13,8 +13,8 @@ public class Dice {
      * @param faceValue what the facevalue is after rolling the dice
      */
     public Dice(int faces, int faceValue){
-        this.faces = faces;
-        this.faceValue = faceValue;
+    this.faces = faces;
+    this.faceValue = faceValue;
     }
 
     public int roll() {
@@ -32,3 +32,4 @@ public class Dice {
     }
 
 }
+

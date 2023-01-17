@@ -1,6 +1,6 @@
 package View;
 
-import Model.FieldList;
+import Model.Fields.Owneble;
 import Model.Fields.Street;
 import Model.Spiller;
 import Model.SpillerListe;
@@ -82,7 +82,7 @@ public class ViewGUI {
 
     public void updateBalance(SpillerListe sl){
         for (int i = 0; i < gui_players.length; i++) {
-            gui_players[i].setBalance(sl.getPlayerList(i).getAccount().getBalance());
+           gui_players[i].setBalance(sl.getPlayerList(i).getAccount().getBalance());
         }
     }
 
@@ -92,8 +92,10 @@ public class ViewGUI {
     }
 
     public void moveCarToField(Spiller player, int fieldToMoveTo){
-        player.setPosition(fieldToMoveTo);
-        gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+        if(player.getPosition() != -1 || fieldToMoveTo != -1) {
+            player.setPosition(fieldToMoveTo);
+            gui_players[player.getPlayerNumber()].getCar().setPosition(gui_fields[player.getPosition()]);
+        }
     }
 
     public void setDice(int dice1, int dice2){
@@ -115,8 +117,17 @@ public class ViewGUI {
         }
     }
 
+    public void removeOwneble(int index){
+        GUI_Field f = gui_fields[index];
+        if(f instanceof GUI_Ownable o) {
+            o.setBorder(Color.BLACK, Color.BLACK);
+        }
+    }
+
     public void showChanceCard(String message){
         gui.displayChanceCard(message);
+        gui.showMessage(message);
+        gui.displayChanceCard("");
     }
 
     public void buyHouseHotel(Street field, int index){
@@ -127,6 +138,38 @@ public class ViewGUI {
             } else
                 s.setHotel(true);
         }
+    }
+
+
+    public int bidCheck(Spiller player, Owneble field){
+        int bid = gui.getUserInteger(player.getName() + " indtast dit bud på " + field.getName() + " (minimum " + field.getPrice() + ")");
+        if (bid > player.getAccount().getBalance()) {
+            gui.showMessage("Invalid beløb, prøv igen");
+            return bidCheck(player, field);
+        }
+        return bid;
+    }
+    // Set field to auction and get the highest bid
+    public int[] auctionField(Owneble field, SpillerListe sl, Spiller spiller){
+        // Return a list of int, where 0 is the bid and 1 is the player number
+        int[] values = new int[2];
+        for (int i = 0; i < sl.getPlayerAmount(); i++) {
+            Spiller player = sl.getPlayerList(i);
+            if(player == spiller || player.isBankRupt() || player.getAccount().getBalance() < field.getPrice()){
+                continue;
+            }
+            int bid = bidCheck(player, field);
+            if(bid > values[0]){
+                values[0] = bid;
+                values[1] = i;
+            }
+        }
+
+        if(values[0] < field.getPrice()){
+            gui.showMessage("Ingen valid bud på " + field.getName() + " derfor bliver feltet solgt til banken");
+            values[1] = -1;
+        }
+        return values;
     }
 
     public void showMessage(String message) {

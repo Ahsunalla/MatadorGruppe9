@@ -9,7 +9,7 @@ public class MoveToField extends ChanceCard {
 
     int moveFieldTo;
 
-    public MoveToField(String description,int moveFieldTo) {
+    public MoveToField(String description, int moveFieldTo) {
         super(description);
         this.moveFieldTo = moveFieldTo;
     }
@@ -17,6 +17,7 @@ public class MoveToField extends ChanceCard {
     @Override
     public void doCard(Spiller player, ViewGUI gui) {
         super.doCard(player, gui);
+        player.setPosition(moveFieldTo);
         gui.moveCarToField(player,moveFieldTo);
     }
 }

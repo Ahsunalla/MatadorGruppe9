@@ -51,6 +51,7 @@ public class BoardGUI {
             }
         }
 
-        return gui_fields;
+    return gui_fields;
     }
+
 }
