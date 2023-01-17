@@ -3,7 +3,7 @@ import Model.Spiller;
 
 import java.awt.*;
 
-public abstract class Owneble extends Field{
+public abstract class  Owneble extends Field{
     private int price;
     private int[] rent;
     private Spiller owner;
